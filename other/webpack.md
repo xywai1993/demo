@@ -39,7 +39,6 @@ module.exports = {
 
 ## 动态多入口配置
 
-webpack.config.js
 ```javascript
 const path = require('path');
 
@@ -116,7 +115,7 @@ module.exports = {
 ```
 
 
-三步
+总结三步
 1. 定义公共文件的入口以及公共文件列表 ,类似这样
 ```javascript
  {
@@ -156,3 +155,5 @@ module.exports = {
     ]
 };
 ```
+
+- [commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/#src/components/Sidebar/Sidebar.jsx) 单独打包插件用法
