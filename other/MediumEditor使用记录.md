@@ -1,6 +1,6 @@
 
 
-#配置按钮
+# 配置按钮
 
 ```javascript
 const defaultData = {
@@ -35,7 +35,7 @@ const defaultData = {
                 },
             }
 ``` 
-中文配置可按上述修改 每个按钮对应的 aria  和 contentDefault
+中文配置可按上述修改每个按钮对应的 aria  和 contentDefault
 
 
 
@@ -70,7 +70,7 @@ const mediu = new MediumEditor('.editable', {
             });
 ```
 
-#medium插件的写法
+# medium插件的写法
 ```javascript
  const disabledButton = MediumEditor.Extension.extend({
         name: 'disabled-button',
@@ -190,7 +190,7 @@ getSelectedParentElement()  比较重要的方法  获取当前选择的父元�
 
 
 
-#做编辑框项目的一些 工具方法
+# 做编辑框项目的一些 工具方法
 
 ```javascript
  const tool = {
