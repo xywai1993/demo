@@ -1,0 +1,7 @@
+{
+  "name": "yiper-cli",
+  "version": "0.0.1",
+  "bin": {
+    "yiper-cli": "./index.js"
+  }
+}

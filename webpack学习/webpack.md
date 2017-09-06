@@ -22,6 +22,7 @@ module.exports = {
 
 在命令行运行 webpack 命令即可 ,好吧，上面就这样了，下面记录点正经的 
 
+**注意**
 - 在window10 下 非全局安装可以直接在命令行运行 webpack命令
 - 在window7 下 非全局安装需调用npm scripts命令
 ```javascript
@@ -91,7 +92,6 @@ module.exports = {
 ```javascript
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const glob = require('glob');
 const files = glob.sync('./src/page/*.js'); 
@@ -111,13 +111,7 @@ module.exports = {
         filename: '[name].build.js',
         path: path.resolve(__dirname, 'dist')
     },
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
+    plugins: [    
         new webpack.optimize.CommonsChunkPlugin({name:'./js/lib/'+'libjs'})  //调用单独打包的插件,注意，这里name的值 一定要跟 entry 对应的值一样
     ]
 };
@@ -187,7 +181,7 @@ module.exports = {
     })
 ```
 
-注意：压缩之前要用babel-loader 转换，否者报错
+**注意**：压缩之前要用babel-loader 转换，否者报错
 
 
 ## 开发环境 
