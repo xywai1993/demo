@@ -1,5 +1,5 @@
 # webpack
-首选当然[官方文档](https://webpack.js.org/guides/getting-started/) ，然后下面是一些使用历程
+首选当然[官方文档](https://webpack.js.org/guides/getting-started/README.md) ，然后下面是一些使用历程
 
 安装：
 ```
@@ -87,7 +87,7 @@ module.exports = {
 
 ## 公共库单独打包
 
-[commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/#src/components/Sidebar/Sidebar.jsx) 插件用法
+[commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/README.md#src/components/Sidebar/Sidebar.jsx) 插件用法
 
 ```javascript
 const path = require('path');
@@ -142,7 +142,7 @@ module.exports = {
 
 
 ## 常用插件
-- [清除构建目录内容](https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder) 这个可以在构建的时候把之前构建的内容清除掉
+- [清除构建目录内容](https://webpack.js.org/guides/output-management/README.md#cleaning-up-the-dist-folder) 这个可以在构建的时候把之前构建的内容清除掉
 
 ```javascript
 npm install clean-webpack-plugin --save-dev
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-- [commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/#src/components/Sidebar/Sidebar.jsx) 单独打包插件用法
+- [commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/README.md#src/components/Sidebar/Sidebar.jsx) 单独打包插件用法
 
 - [webpack.optimize.UglifyJsPlugin]()  js压缩插件，webpack自带
 
@@ -204,3 +204,4 @@ module.exports = merge(common,{
 }
 ```
 
+danteng
