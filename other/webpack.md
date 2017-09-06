@@ -20,7 +20,18 @@ module.exports = {
 };
 ```
 
-在命令行运行 webpack 命令即可 ,好吧，上面就这样了，下面记录点正经的
+在命令行运行 webpack 命令即可 ,好吧，上面就这样了，下面记录点正经的 
+
+- 在window10 下 非全局安装可以直接在命令行运行 webpack命令
+- 在window7 下 非全局安装需调用npm scripts命令
+```javascript
+{
+  "scripts": {
+    "start": "webpack"
+  }
+}
+```
+
 
 ## 多入口配置
 
@@ -43,12 +54,18 @@ module.exports = {
 const path = require('path');
 
 const glob = require('glob');
-const files = glob.sync('./src/page/*.js'); //动态获取入口文件  返回值类似[ './src/page/index.js', './src/page/two.js' ]
+const files = glob.sync('./src/page/**/*.js'); //动态获取入口文件  返回值类似[ './src/page/index.js', './src/page/two.js','./src/page/kb/xxx.js' ]
 
 let entryList = {};
 files.forEach(function(f){
     let name = path.basename(f,'.js');  //获取文件名
-    entryList['./js/page/'+name] = f;  // 构建后的文件 放在 dist/js/page 下 ，为什么不在output.filename 里写构建路径 是因为页面入口 和 公共文件入口这样可以分别写构建路径
+    entryList['./js/page/'+name] = f;  // 构建后的文件 放在 dist/js/page 下 ，为什么不在output.filename 里写构建路径 是因为页面入口 和 公共文件入口这样可以分别写构建路径 
+    
+    //或者  直接原路径做一下操作，成为自己想要的目录结构
+   // let url = f.replace(/\.\/src/, './js').replace(/\.js/,'');
+   //       entryList[url] = f; 
+    
+    
 });
 
 module.exports = {
@@ -101,7 +118,7 @@ module.exports = {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        new webpack.optimize.CommonsChunkPlugin({name:'libjs'})  //调用单独打包的插件
+        new webpack.optimize.CommonsChunkPlugin({name:'./js/lib/'+'libjs'})  //调用单独打包的插件,注意，这里name的值 一定要跟 entry 对应的值一样
     ]
 };
 
@@ -157,3 +174,23 @@ module.exports = {
 ```
 
 - [commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/#src/components/Sidebar/Sidebar.jsx) 单独打包插件用法
+
+## 开发环境 
+1. 新建 webpack.dev.js 单独写开发环境的配置 ，开始devtool
+```javascript
+const merge = require('webpack-merge');  //需安装  npm install --save-dev webpack-merge
+const common = require('./webpack.config.js');
+
+module.exports = merge(common,{
+    devtool: 'inline-source-map'
+});
+```
+
+2.  开启文件监听 自动编译 
+```javascript
+{
+    "scripts": {
+        "start": "webpack --watch --config webpack.dev.js"
+      }
+}
+```
