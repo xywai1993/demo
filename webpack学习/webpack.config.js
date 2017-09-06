@@ -19,7 +19,7 @@ files.forEach(function(f){
 });
 
 //公共库单独打包
-entryList['./js/lib/'+'libjs'] = ['vue','jquery','./src/lib/liblib.js'];
+entryList['./js/lib/'+'libjs'] = ['jquery','./src/lib/liblib.js'];
 
 module.exports = {
     entry:entryList,
@@ -35,6 +35,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [ 'style-loader', 'css-loader' ]
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
             }
         ]
     }

@@ -175,6 +175,21 @@ module.exports = {
 
 - [commons-chunk-plugin](https://webpack.js.org/plugins/commons-chunk-plugin/#src/components/Sidebar/Sidebar.jsx) 单独打包插件用法
 
+- [webpack.optimize.UglifyJsPlugin]()  js压缩插件，webpack自带
+
+```
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false,
+            drop_console:true
+        },
+        sourceMap: true
+    })
+```
+
+注意：压缩之前要用babel-loader 转换，否者报错
+
+
 ## 开发环境 
 1. 新建 webpack.dev.js 单独写开发环境的配置 ，开始devtool
 ```javascript
@@ -194,3 +209,4 @@ module.exports = merge(common,{
       }
 }
 ```
+

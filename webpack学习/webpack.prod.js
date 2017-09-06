@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+//const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = merge(common,{
     output: {
@@ -26,6 +26,7 @@ module.exports = merge(common,{
                 drop_console:true
             },
             sourceMap: true
-        }),
+        })
+       
     ]
 });
