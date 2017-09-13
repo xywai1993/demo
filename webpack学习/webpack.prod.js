@@ -6,13 +6,16 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 //const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = merge(common,{
     output: {
-        filename: '[name].build.js',
+        filename: 'js/[name].build.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://127.0.0.1:3000'
+        publicPath: 'http://127.0.0.1:3000/'   //静态资源服务器
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
@@ -25,12 +28,14 @@ module.exports = merge(common,{
         new HtmlWebpackPlugin({
             template: 'html/index.html',
             filename:'index.html',
-            chunks:['index']
+            chunks:['liblib','index'],
+            chunksSortMode: 'dependency'
         }),
         new HtmlWebpackPlugin({
             template: 'html/two.html',
             filename:'two.html',
-            chunks:['two']
+            chunks:['two'],
+            chunksSortMode: 'dependency'
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -40,7 +45,8 @@ module.exports = merge(common,{
             sourceMap: true
         }),
         // 提取css
-        new ExtractTextPlugin("css/styles.css")
+        new ExtractTextPlugin("css/[name].css"),
+        new OptimizeCSSPlugin()
        
     ]
 });

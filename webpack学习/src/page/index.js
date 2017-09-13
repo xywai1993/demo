@@ -3,10 +3,9 @@
  */
 
 import add from '../other/add';
-import $ from 'jquery';
 import '../css/base.css'
 import '../css/style.css'
 
-console.log($('#app'));
-console.log(add()+100);
+alert($('#app'));
+alert(add()+100);
 

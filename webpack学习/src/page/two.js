@@ -3,5 +3,6 @@
  */
 
 import add from '../other/add';
+import '../css/base.css'
 
 alert(add(13,40));

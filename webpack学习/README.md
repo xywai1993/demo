@@ -196,6 +196,7 @@ module.exports = merge(common,{
 ```
 
 2.  开启文件监听 自动编译 
+package.json
 ```javascript
 {
     "scripts": {
@@ -204,4 +205,56 @@ module.exports = merge(common,{
 }
 ```
 
-danteng
+## 生成环境
+
+webpack.prod.js
+```javascript
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const common = require('./webpack.config.js');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");  //提取css
+//const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')  //压缩css
+
+module.exports = merge(common,{
+    output: {
+        filename: 'js/[name].build.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'http://127.0.0.1:3000/'
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        //生成对应入口的html文件
+        new HtmlWebpackPlugin({
+            template: 'html/index.html',
+            filename:'index.html',
+            chunks:['liblib','index']
+        }),
+        new HtmlWebpackPlugin({
+            template: 'html/two.html',
+            filename:'two.html',
+            chunks:['two']
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console:true
+            },
+            sourceMap: true
+        }),
+        // 提取css
+        new ExtractTextPlugin("css/[name].css"),   //如不需要按需加载css ,则可以打包成一个css new ExtractTextPlugin("css/style.css")
+        new OptimizeCSSPlugin()
+       
+    ]
+});
+```
+

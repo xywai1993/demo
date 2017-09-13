@@ -22,7 +22,7 @@ module.exports = merge(common,{
         new HtmlWebpackPlugin({
             template: 'html/index.html',
             filename:'index.html',
-            chunks:['index']
+            chunks:['liblib','index']
         }),
         new HtmlWebpackPlugin({
             template: 'html/two.html',
