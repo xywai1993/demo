@@ -5,6 +5,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const glob = require('glob');
 const files = glob.sync('./src/page/**/*.js'); //动态获取入口文件  返回值类似[ './src/page/index.js', './src/page/two.js','./src/page/kb/xxx.js' ]
@@ -22,19 +23,27 @@ files.forEach(function(f){
 entryList['./js/lib/'+'libjs'] = ['jquery','./src/lib/liblib.js'];
 
 module.exports = {
-    entry:entryList,
+    entry:{
+        index:'./src/page/index.js',
+        two:'./src/page/two.js'
+    },
     // output: {
     //     filename: '[name].build.js',
     //     path: path.resolve(__dirname, 'dist')
     // },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({name:'./js/lib/'+'libjs'})
+        new webpack.optimize.CommonsChunkPlugin({name:'index',chunks:['index']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'two',chunks:['two']}),
+        new ExtractTextPlugin("css/styles.css")
     ],
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [ 'style-loader', 'css-loader' ]
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
             {
                 test: /\.js$/,
@@ -45,6 +54,25 @@ module.exports = {
                         presets: ['env']
                     }
                 }
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                query: {
+                    limit: 10000,
+                    name: '/img/[name].[hash:7].[ext]'
+                }
+            },
+            {
+                test: /\.html$/,
+                use: [ {
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true,
+                        removeComments: false,
+                        collapseWhitespace: false
+                    }
+                }]
             }
         ]
     }

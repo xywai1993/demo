@@ -7,29 +7,37 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-console.log('xxx',common.entry);
 module.exports = merge(common,{
     devtool: 'inline-source-map',
 
     output: {
-        filename: '[name].dev.js',
+        filename: 'js/[name].dev.js',
         path: path.resolve(__dirname, 'dev'),
-        publicPath: '/'
+        publicPath: 'http://localhost:8080/'
     },
     plugins: [
         new CleanWebpackPlugin(['dev']),
         new HtmlWebpackPlugin({
             template: 'html/index.html',
-            //chunks:[]
+            filename:'index.html',
+            chunks:['index']
+        }),
+        new HtmlWebpackPlugin({
+            template: 'html/two.html',
+            filename:'two.html',
+            chunks:['two']
         }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('dev')
             }
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     devServer:{
-      //  contentBase: './dev'
+        contentBase: './dev',
+        hot:true
     }
 });

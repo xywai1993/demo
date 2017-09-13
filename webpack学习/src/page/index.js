@@ -4,6 +4,7 @@
 
 import add from '../other/add';
 import $ from 'jquery';
+import '../css/base.css'
 import '../css/style.css'
 
 console.log($('#app'));
