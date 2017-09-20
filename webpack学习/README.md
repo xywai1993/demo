@@ -204,6 +204,33 @@ package.json
       }
 }
 ```
+3. 代理接口 
+本地调试接口的时候会跨域，这个时候可以用到代理功能
+
+webpack.dev.js
+```javascript
+{
+    devServer:{
+        contentBase: './dev',
+        hot:true,
+        proxy: { // 这里设置要代理的接口
+            '/sdf.txt': 'http://127.0.0.1:3000' ,
+            '/api':'http://127.0.0.1:3333'
+        },
+        compress: true
+    }
+}
+```
+
+项目中
+```javascript
+$.ajax('/sdf.txt');  //这个时候会请求 http://localhost:8080/sdf.txt ，但实际会代理到http://127.0.0.1:3000/sdf.txt
+
+```
+
+
+
+
 
 ## 生成环境
 

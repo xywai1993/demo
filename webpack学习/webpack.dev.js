@@ -34,10 +34,15 @@ module.exports = merge(common,{
                 NODE_ENV: JSON.stringify('dev')
             }
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin("css/[name].css")
     ],
     devServer:{
         contentBase: './dev',
-        hot:true
+        hot:true,
+        proxy: { // proxy URLs to backend development server
+            '/sdf.txt': 'http://127.0.0.1:3000'
+        },
+        compress: true
     }
 });

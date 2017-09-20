@@ -3,9 +3,11 @@
  */
 
 import add from '../other/add';
+import $ from 'jquery'
 import '../css/base.css'
 import '../css/style.css'
 
-alert($('#app'));
-alert(add()+100);
+$.ajax('/sdf.txt');
+
+console.log(add()+100);
 
