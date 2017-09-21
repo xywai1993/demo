@@ -1,0 +1,13 @@
+{
+  "name": "mock的使用",
+  "version": "0.0.1",
+  "dependencies": {},
+  "scripts":{
+    "start":"webpack"
+  },
+  "devDependencies": {
+    "axios": "^0.16.2",
+    "mockjs": "^1.0.1-beta3",
+    "webpack": "^3.6.0"
+  }
+}
