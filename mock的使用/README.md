@@ -1,8 +1,8 @@
-# mock 可以拦截ajax请求 和 模拟数据
+#  mock 可以拦截ajax请求 和 模拟数据
 
 [官网](http://mockjs.com/)  文档一点都不清晰，主要体现在如何拦截ajax请求都没有
 
-## 拦截请求
+##  拦截请求
 
 配置要拦截的接口 与 返回的数据
 mock.js
@@ -23,7 +23,7 @@ axios.get('/abc').then(data=>{
 
 
 
-##模拟请求
+## 模拟请求
 
 [直接看官方示例](http://mockjs.com/examples.html)
 
