@@ -21,6 +21,8 @@ axios.get('/abc').then(data=>{
 });
 ``` 
 
+
+
 ##模拟请求
 
 [直接看官方示例](http://mockjs.com/examples.html)
