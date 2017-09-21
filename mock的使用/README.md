@@ -1,11 +1,11 @@
-#mock 可以拦截ajax请求 和 模拟数据
+# mock 可以拦截ajax请求 和 模拟数据
 
 [官网](http://mockjs.com/)  文档一点都不清晰，主要体现在如何拦截ajax请求都没有
 
-##拦截请求
-mock.js
+## 拦截请求
 
 配置要拦截的接口 与 返回的数据
+mock.js
 ```javascript
 import Mock from 'mockjs';
 Mock.mock('/abc',{data:'abc'});
