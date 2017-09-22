@@ -19,11 +19,11 @@ import axios from 'axios';
 axios.get('/abc').then(data=>{
     console.log(data); // 打印 {... data:{data:'abc'} ...}
 });
-``` 
+```
 
 
 
-## 模拟请求
+## 模拟数据
 
 [直接看官方示例](http://mockjs.com/examples.html)
 
