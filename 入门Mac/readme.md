@@ -3,7 +3,7 @@ clear 清空命令行
 
 ## 修改host
 1. 进入根目录
-```angular2html
+```base
     cd /
 ```
 2.  
