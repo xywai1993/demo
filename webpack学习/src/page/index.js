@@ -7,7 +7,7 @@ import $ from 'jquery'
 import '../css/base.css'
 import '../css/style.css'
 
-$.ajax('/sdf.txt');
-
-console.log(add()+100);
+//fetch('/sdf.txt').then(data=>console.log(data));
+console.log(200/4);
+console.log(add()+10);
 

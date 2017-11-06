@@ -15,14 +15,15 @@ module.exports = merge(common,{
     output: {
         filename: 'js/[name].dev.js',
         path: path.resolve(__dirname, 'dev'),
-        publicPath: 'http://localhost:8080/'
+        publicPath: '/'
     },
     plugins: [
         new CleanWebpackPlugin(['dev']),
         new HtmlWebpackPlugin({
             template: 'html/index.html',
             filename:'index.html',
-            chunks:['liblib','index']
+            chunks:['liblib','index'],
+            chunksSortMode:'dependency'
         }),
         new HtmlWebpackPlugin({
             template: 'html/two.html',
@@ -38,11 +39,15 @@ module.exports = merge(common,{
         new ExtractTextPlugin("css/[name].css")
     ],
     devServer:{
+        index: 'index.html',
         contentBase: './dev',
-        hot:true,
+        hot:true,  //热更新
+        hotOnly:true, //刷新页面
         proxy: { // proxy URLs to backend development server
             '/sdf.txt': 'http://127.0.0.1:3000'
         },
-        compress: true
+        watchContentBase: true,
+        compress: true,
+        open:true
     }
 });

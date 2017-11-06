@@ -17,6 +17,21 @@ module.exports = merge(common,{
         path: path.resolve(__dirname, 'dist'),
         publicPath: 'http://127.0.0.1:3000/'   //静态资源服务器
     },
+    module:{
+      rules:[
+          {
+              test: /\.css$/,
+              use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+              })
+          },
+          {
+              test: /\.(png|jpg|gif)$/,
+              use:['file-loader']
+          }
+      ]
+    },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new webpack.DefinePlugin({
@@ -24,7 +39,11 @@ module.exports = merge(common,{
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        //生成对应入口的html文件
+        // // 提取css
+        new ExtractTextPlugin("css/[name].css"),
+        new OptimizeCSSPlugin(),
+
+        // //生成对应入口的html文件
         new HtmlWebpackPlugin({
             template: 'html/index.html',
             filename:'index.html',
@@ -43,10 +62,7 @@ module.exports = merge(common,{
                 drop_console:true
             },
             sourceMap: true
-        }),
-        // 提取css
-        new ExtractTextPlugin("css/[name].css"),
-        new OptimizeCSSPlugin()
-       
+        })
+
     ]
 });
