@@ -1,6 +1,8 @@
 /**
  * Created by yiper on 2017/9/4.
  */
+
+process.env.NODE_ENV = 'dev';
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -35,6 +37,9 @@ module.exports = merge(common,{
                 NODE_ENV: JSON.stringify('dev')
             }
         }),
+        new webpack.optimize.CommonsChunkPlugin({name:'liblib',chunks:['liblib']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'index',chunks:['index']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'two',chunks:['two']}) ,
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin("css/[name].css")
     ],

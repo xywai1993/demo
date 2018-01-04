@@ -10,19 +10,14 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const glob = require('glob');
 const files = glob.sync('./src/page/**/*.js'); //动态获取入口文件  返回值类似[ './src/page/index.js', './src/page/two.js','./src/page/kb/xxx.js' ]
 
-
-
+const env = process.env.NODE_ENV;
+console.log(env);
 module.exports = {
     entry:{
         index:'./src/page/index.js',
         two:'./src/page/two.js',
         'liblib':['jquery','./src/lib/liblib.js']
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({name:'liblib',chunks:['liblib']}),
-        new webpack.optimize.CommonsChunkPlugin({name:'index',chunks:['index']}),
-        new webpack.optimize.CommonsChunkPlugin({name:'two',chunks:['two']})
-    ],
     module: {
         rules: [
             {
@@ -31,7 +26,12 @@ module.exports = {
                 //     fallback: "style-loader",
                 //     use: "css-loader"
                 // })
-                use:['style-loader','css-loader']
+                use:env === 'production'
+                    ? ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [ 'css-loader' ]
+                    })
+                    : [ 'style-loader', 'css-loader' ]
             },
             {
                 test: /\.js$/,
@@ -63,5 +63,12 @@ module.exports = {
                 }]
             }
         ]
-    }
+    },
+    plugins: env === 'production'
+        ? [
+            new ExtractTextPlugin({
+                filename: 'css/[name].css'
+            })
+        ]
+        : []
 };

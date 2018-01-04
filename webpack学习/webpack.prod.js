@@ -1,6 +1,7 @@
 /**
  * Created by yiper on 2017/9/4.
  */
+process.env.NODE_ENV = 'production';
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -11,36 +12,27 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 //const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+
+
 module.exports = merge(common,{
     output: {
         filename: 'js/[name].build.js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: 'http://127.0.0.1:3000/'   //静态资源服务器
     },
-    module:{
-      rules:[
-          {
-              test: /\.css$/,
-              use: ExtractTextPlugin.extract({
-                  fallback: "style-loader",
-                  use: "css-loader"
-              })
-          },
-          {
-              test: /\.(png|jpg|gif)$/,
-              use:['file-loader']
-          }
-      ]
-    },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         NODE_ENV: JSON.stringify('production')
+        //     }
+        // }),
+        new webpack.optimize.CommonsChunkPlugin({name:'liblib',chunks:['liblib']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'index',chunks:['index']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'two',chunks:['two']}) ,
+
         // // 提取css
-        new ExtractTextPlugin("css/[name].css"),
+        // new ExtractTextPlugin("css/[name].css"),
         new OptimizeCSSPlugin(),
 
         // //生成对应入口的html文件

@@ -36,3 +36,14 @@ lsof -i:端口号
 ```
 kill -9 PID
 ```
+
+## 截图
+
+```
+control+command+a
+```
+
+## 打开未知应用来源
+sudo spctl --master-disable
+sudo spctl --master-enable
+
