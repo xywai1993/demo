@@ -1,7 +1,11 @@
 {
-  "name": "yiper-cli",
-  "version": "0.0.1",
-  "bin": {
-    "yiper-cli": "./index.js"
-  }
+    "name": "yiper-cli",
+    "version": "0.0.1",
+    "bin": {
+        "yiper-cli": "index.js"
+    },
+    "dependencies": {
+        "download-git-repo": "^1.0.2",
+        "metalsmith": "^2.3.0"
+    }
 }
