@@ -16,4 +16,4 @@ MediumEditor 使用记录 以及一些文本输入项目的小工具
 
 [mock 的使用](./mock的使用/README.md)
 
-[Mac 的基础操作](./入门Mac/README.md)
+[Mac 的基础操作](./入门Mac/readme.md)
