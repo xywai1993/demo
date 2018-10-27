@@ -29,4 +29,8 @@ console.log('刚才什么情况')
 之后就可以在命令行下直接调用 **yiper-cli** 命令
 
 3.发布到npm
+
+```
 npm publish
+```
+

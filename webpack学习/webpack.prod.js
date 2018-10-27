@@ -1,6 +1,7 @@
 /**
  * Created by yiper on 2017/9/4.
  */
+process.env.NODE_ENV = 'production';
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -11,6 +12,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 //const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+
+
 module.exports = merge(common,{
     output: {
         filename: 'js/[name].build.js',
@@ -19,12 +22,20 @@ module.exports = merge(common,{
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        //生成对应入口的html文件
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         NODE_ENV: JSON.stringify('production')
+        //     }
+        // }),
+        new webpack.optimize.CommonsChunkPlugin({name:'liblib',chunks:['liblib']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'index',chunks:['index']}),
+        new webpack.optimize.CommonsChunkPlugin({name:'two',chunks:['two']}) ,
+
+        // // 提取css
+        // new ExtractTextPlugin("css/[name].css"),
+        new OptimizeCSSPlugin(),
+
+        // //生成对应入口的html文件
         new HtmlWebpackPlugin({
             template: 'html/index.html',
             filename:'index.html',
@@ -43,10 +54,7 @@ module.exports = merge(common,{
                 drop_console:true
             },
             sourceMap: true
-        }),
-        // 提取css
-        new ExtractTextPlugin("css/[name].css"),
-        new OptimizeCSSPlugin()
-       
+        })
+
     ]
 });

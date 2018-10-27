@@ -1,33 +1,33 @@
-#! node
+#!/usr/bin/env node
 
-console.log('刚才什么情况')
-const fs = require('fs');
-const path = require('path');
+// 10行伪代码实现一个CLI
+// function CLI(packageSourcePath) {
+//     const context = {}
+//     const meta = require(path.join(packageSourcePath, 'meta.js'))
+//     const templatePath = path.join(packageSourcePath, 'template')
+//     const { prompts } = meta
+//     return promptsRunner(prompts).then(anwsers => {
+//         Object.assign(context, anwsers)
+//         return generateFiles(templatePath, context)
+//     })
+//     .then(() =>  console.log('[OK]'))
+//     .error(() => console.log('[Error]'))
+// }
 
+console.log('刚才什么情况');
 
-let files = [];
+// const download = require('download-git-repo');
 
-const dir = fs.readdirSync('./src');
-console.log(dir);
-function copyDir(url,arr) {
-   const dir = fs.readdirSync(url) ;
+// download('xywai1993/webtt', 'download-temp', {}, err => {
+//     console.log(err);
+// });
 
-    arr.push(url);
-    dir.forEach(file =>{
-        //console.log(path.resolve(__dirname, file));
-        //console.log(fs.lstatSync(path.resolve(url, file)).isDirectory());
-        if(fs.lstatSync(path.resolve(url, file)).isDirectory()){
+const { lstatSync, copyFile } = require('fs');
+copyFile('template', 'temp', err => {
+    console.log(err);
+});
 
-            arr.push( copyDir(path.resolve(url, file),[]));
-        }else{
-            arr.push(file);
-        }
-    })
-    return arr;
-}
-
-console.log(copyDir('./src',[]));
-
-if(!fs.existsSync('./dist')){
-    fs.mkdirSync('./dist')
-}
+const copydir = dir => {
+    if (lstatSync(dir).isDirectory()) {
+    }
+};
