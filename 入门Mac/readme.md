@@ -1,27 +1,35 @@
 ## 命令行
+
 clear 清空命令行
 
-## 修改host
+## 修改 host
+
 1. 进入根目录
+
 ```base
     cd /
 ```
-2.  
+
+2.
+
 ```base
     sudo vi etc/hosts
 ```
+
 3. 按 **i** 健 进入编辑模式
 
 4. 按 **esc** 退出编辑模式
 5. 编辑好后按 **:wq!** 保存并退出
 
-## 查看IP地址
+## 查看 IP 地址
+
 ```base
-osascript -e "system info"  
+osascript -e "system info"
 ```
 
 可以输出系统的所有信息
-所以 
+所以
+
 ```base
 osascript -e "IPv4 address of (system info)"
 ```
@@ -33,6 +41,7 @@ osascript -e "IPv4 address of (system info)"
 ```
 lsof -i:端口号
 ```
+
 ```
 kill -9 PID
 ```
@@ -44,6 +53,8 @@ control+command+a
 ```
 
 ## 打开未知应用来源
+
+```
 sudo spctl --master-disable
 sudo spctl --master-enable
-
+```
