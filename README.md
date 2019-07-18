@@ -10,10 +10,10 @@ vue 优化系统下拉选择框
 [MediumEditor](./other/MediumEditor使用记录.md)
 MediumEditor 使用记录 以及一些文本输入项目的小工具
 
-[webpack](./webpack学习/README.md) webpack 使用历程
+[webpack](./other/webpack学习记录.md) webpack 使用历程
 
-[编写 cli](./编写cli工具/README.md) 工具
+[编写 cli](./other/编写cli学习记录.md) 工具
 
-[mock 的使用](./mock的使用/README.md)
+[mock 的使用](./other/mock学习记录.md)
 
 [Mac 的基础操作](./入门Mac/readme.md)

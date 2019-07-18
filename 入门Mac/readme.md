@@ -58,3 +58,11 @@ control+command+a
 sudo spctl --master-disable
 sudo spctl --master-enable
 ```
+
+## 查看命令 的路径
+
+which
+
+例如查看 prettier 命令的安装路径
+which prettier
+/usr/local/bin/prettier
